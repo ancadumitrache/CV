@@ -1,0 +1,829 @@
+\documentclass[10pt]{article}
+\RequirePackage[T1]{fontenc}
+
+% The automated optical recognition software used to digitize resume
+% information works best with fonts that do not have serifs. This
+% command uses a sans serif font throughout. Uncomment both lines (or at
+% least the second) to restore a Roman font (i.e., a font with serifs).
+\usepackage{times}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{graphicx}
+\usepackage{MnSymbol,wasysym}
+\usepackage{marvosym}
+
+% The OCR software also has a hard time with italics. These commands get
+% rid of the two common ways to italicize text in LaTeX. Get rid of them
+% to turn italics back on.
+\renewcommand\emph[1]{#1}
+\renewcommand\textit[1]{\underline{#1}}
+
+% This is a helpful package that puts math inside length specifications
+\usepackage{calc}
+
+% This package helps LaTeX auto-hyphenate hyphenated words if you use
+% special hyphens. For example, bio\-/mimicry will properly hyphenate
+% ``mimicry'' if necessary.
+\usepackage[shortcuts]{extdash}
+
+% Layout: Puts the section titles on left side of page
+\reversemarginpar
+
+%
+%         PAPER SIZE, PAGE NUMBER, AND DOCUMENT LAYOUT NOTES:
+%
+% The next \usepackage line changes the layout for CV style section
+% headings as marginal notes. It also sets up the paper size as either
+% letter or A4. By default, letter was used. If A4 paper is desired,
+% comment out the letterpaper lines and uncomment the a4paper lines.
+%
+% As you can see, the margin widths and section title widths can be
+% easily adjusted.
+%
+% ALSO: Notice that the includefoot option can be commented OUT in order
+% to put the PAGE NUMBER *IN* the bottom margin. This will make the
+% effective text area larger.
+%
+% IF YOU WISH TO REMOVE THE ``of LASTPAGE'' next to each page number,
+% see the note about the +LP and -LP lines below. Comment out the +LP
+% and uncomment the -LP.
+%
+% IF YOU WISH TO REMOVE PAGE NUMBERS, be sure that the includefoot line
+% is uncommented and ALSO uncomment the \pagestyle{empty} a few lines
+% below.
+%
+
+%% Use these lines for letter-sized paper
+%\usepackage[paper=letterpaper,
+%            %includefoot, % Uncomment to put page number above margin
+%            marginparwidth=1.2in,     % Length of section titles
+%            marginparsep=.05in,       % Space between titles and text
+%            margin=1in,               % 1 inch margins
+%            includemp]{geometry}
+
+%% Use these lines for A4-sized paper
+\usepackage[paper=a4paper,
+            %includefoot, % Uncomment to put page number above margin
+            marginparwidth=27.5mm,    % Length of section titles
+            marginparsep=1.5mm,       % Space between titles and text
+            margin=20mm,              % 25mm margins
+            includemp]{geometry}
+
+%% More layout: Get rid of indenting throughout entire document
+\setlength{\parindent}{0in}
+
+% Provides special list environments and macros to create new ones
+\usepackage[shortlabels]{enumitem}
+
+% Simpler bibsections for CV sections
+% (thanks to natbib for inspiration)
+%
+% * For lists of references with hanging indents and no numbers:
+%
+%   \begin{bibsection}
+%       \item ...
+%   \end{bibsection}
+%
+% * For numbered lists of references (with hanging indents):
+%
+%   \begin{bibenum}
+%       \item ...
+%   \end{bibenum}
+%
+%   Note that bibenum numbers continuously throughout. To reset the
+%   counter, use
+%
+%   \restartlist{bibenum}
+%
+%   at the place where you want the numbering to reset.
+
+\makeatletter
+\newlength{\bibhang}
+\setlength{\bibhang}{1em}
+\newlength{\bibsep}
+ {\@listi \global\bibsep\itemsep \global\advance\bibsep by\parsep}
+\newlist{bibsection}{itemize}{3}
+\setlist[bibsection]{label=,leftmargin=\bibhang,%
+        itemindent=-\bibhang,
+        itemsep=0.5\bibsep,parsep=\z@,partopsep=0pt,
+        topsep=0pt}
+\newlist{bibenum}{enumerate}{3}
+\setlist[bibenum]{label=[\arabic*],resume,leftmargin={\bibhang+\widthof{[999]}},%
+        itemindent=-\bibhang,
+        itemsep=\bibsep,parsep=\z@,partopsep=0pt,
+        topsep=0pt}
+\let\oldendbibenum\endbibenum
+\def\endbibenum{\oldendbibenum\vspace{-.6\baselineskip}}
+\let\oldendbibsection\endbibsection
+\def\endbibsection{\oldendbibsection\vspace{-.6\baselineskip}}
+\makeatother
+
+%%% Setup header and footer (with page number and possible last page)
+%
+% The first block sets up pages 2--end
+% The second block sets up page 1 formatting
+%
+%%%
+%
+% NOTE: comment the +LP lines and uncomment the -LP lines to have page
+%       numbers without the ``of ##'' last page reference)
+%
+% NOTE: uncomment the \pagestyle{empty} line to get rid of all page
+%       numbers on pages 2--end. To get rid of page numbers on page 1,
+%       comment out the \thispagestyle{plain} line on the first page
+%       below.
+%       (also make sure includefoot is commented out above)
+%
+\usepackage{fancyhdr,lastpage}
+%\pagestyle{fancy}
+\pagestyle{empty}      % Uncomment this to get rid of page numbers
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+
+%%%% PAGES 2--9 NUMBERING:
+%% These two lines put page number in upper-right corner of pages 2--end
+\rhead{Dumitrache, p.~\arabic{page} of \protect\pageref*{LastPage}}   % +LP
+%\rhead{Pavlic, p.~\arabic{page}}                                 % -LP
+
+%% These lines put page number in bottom (center) of pages 2--end
+%\lfoot{\hspace{\footpageshift}%
+%       \parbox{4in}{\, \hfill %
+%                    \arabic{page} of \protect\pageref*{LastPage} % +LP
+%%                    \arabic{page}                               % -LP
+%                    \hfill \,}}
+%%%% END PAGE 2--9 NUMBERING
+
+%%%% PAGE 1 NUMBERING:
+\makeatletter
+\let\oldps@plain\ps@plain
+\renewcommand{\ps@plain}{\oldps@plain%
+\renewcommand{\@evenfoot}{\hspace*{-\footpageshift}\hfil %
+    p.~\arabic{page} of \protect\pageref*{LastPage} % +LP
+%    p.~\arabic{page}                               % -LP
+    \hfil}%
+\renewcommand{\@oddfoot}{\@evenfoot}}
+\makeatother
+%%%% END PAGE 1 NUMBERING
+
+% Finally, give us PDF bookmarks and colored links
+%
+% NOTE: Some OCR software might be negatively affected by hyperlinks. So
+%       most employers recommend the draft option here. Alternatively,
+%       making all links black (as opposed to darkblue) should hopefully
+%       prevent problems with most OCR.
+%
+% (to enable hyperlinks and bookmarks, comment out ``draft'' line;
+%  to disable hyperlinks and bookmarks, uncomment ``draft'' line)
+\usepackage{color,hyperref}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{breaklinks,colorlinks,
+            linkcolor=black,urlcolor=black,
+            anchorcolor=black,citecolor=black,
+%            linkcolor=darkblue,urlcolor=darkblue,
+%            anchorcolor=darkblue,citecolor=darkblue,
+            %draft
+            }
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% HEADING AT TOP OF CURRICULUM VITAE
+
+% The title (name) with a horizontal rule under it
+% (optional argument typesets an object right-justified across from name
+%  as well)
+%
+% Usage: \makeheading{name}
+%        OR
+%        \makeheading[right_object]{name}
+%
+% Place at top of document. It should be the first thing.
+% If ``right_object'' is provided in the square-braced optional
+% argument, it will be right justified on the same line as ``name'' at
+% the top of the CV. For example:
+%
+%       \makeheading[\emph{Curriculum vitae}]{Your Name}
+%
+% will put an emphasized ``Curriculum vitae'' at the top of the document
+% as a title. Likewise, a picture could be included:
+%
+%   \makeheading[{\includegraphics[height=1.5in]{my_picture}}]{Your Name}
+%
+% the picture will be flush right across from the name. For this example
+% to work, make sure the extra set of curly braces is included. Also
+% makes ure that \usepackage{graphicx} is somewhere in the preamble.
+\newcommand{\makeheading}[2][]%
+        {\hspace*{-\marginparsep minus \marginparwidth}%
+         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+             {\large \bfseries #2 \hfill #1}\\[-0.15\baselineskip]%
+                 \rule{\columnwidth}{1pt}%
+         \end{minipage}}
+
+%%% SECTION HEADINGS
+
+% The section headings. Flush left in small caps down pseudo-margin.
+%
+% Usage: \section{section name}
+\renewcommand{\section}[1]{\pagebreak[3]%
+    \vspace{1.3\baselineskip}%
+    \phantomsection\addcontentsline{toc}{section}{#1}%
+    \noindent\llap{\scshape\smash{\parbox[t]{\marginparwidth}{\hyphenpenalty=10000\raggedright #1}}}%
+    \vspace{-\baselineskip}\par}
+
+%%% LISTS
+
+% This macro alters a list by removing some of the space that follows the list
+% (is used by lists below)
+\newcommand*\fixendlist[1]{%
+    \expandafter\let\csname preFixEndListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\csname preFixEndListend#1\endcsname\vspace{-0.6\baselineskip}}}
+
+% These macros help ensure that items in outer-type lists do not get
+% separated from the next line by a page break
+% (they are used by lists below)
+\let\originalItem\item
+\newcommand*\fixouterlist[1]{%
+    \expandafter\let\csname preFixOuterList#1\expandafter\endcsname\csname #1\endcsname
+    \expandafter\def\csname #1\endcsname{\let\oldItem\item\def\item{\pagebreak[2]\oldItem}\csname preFixOuterList#1\endcsname}
+    \expandafter\let\csname preFixOuterListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\let\item\oldItem\csname preFixOuterListend#1\endcsname}}
+\newcommand*\fixinnerlist[1]{%
+    \expandafter\let\csname preFixInnerList#1\expandafter\endcsname\csname #1\endcsname
+    \expandafter\def\csname #1\endcsname{\let\oldItem\item\let\item\originalItem\csname preFixInnerList#1\endcsname}
+    \expandafter\let\csname preFixInnerListend#1\expandafter\endcsname\csname end#1\endcsname
+    \expandafter\def\csname end#1\endcsname{\csname preFixInnerListend#1\endcsname\let\item\oldItem}}
+
+% An itemize-style list with lots of space between items
+%
+% Usage:
+%   \begin{outerlist}
+%       \item ...    % (or \item for no bullet)
+%   \end{outerlist}
+\newlist{outerlist}{itemize}{3}
+    \setlist[outerlist]{label=\enskip\textbullet,leftmargin=*}
+    \fixendlist{outerlist}
+    \fixouterlist{outerlist}
+
+% An environment IDENTICAL to outerlist that has better pre-list spacing
+% when used as the first thing in a \section
+%
+% Usage:
+%   \begin{lonelist}
+%       \item ...    % (or \item for no bullet)
+%   \end{lonelist}
+\newlist{lonelist}{itemize}{3}
+    \setlist[lonelist]{label=\enskip\textbullet,leftmargin=*,partopsep=0pt,topsep=0pt}
+    \fixendlist{lonelist}
+    \fixouterlist{lonelist}
+
+% An itemize-style list with little space between items
+%
+% Usage:
+%   \begin{innerlist}
+%       \item ...    % (or \item for no bullet)
+%   \end{innerlist}
+%\end{outerlist}
+\newlist{innerlist}{itemize}{3}
+    \setlist[innerlist]{label=\enskip\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+    \fixinnerlist{innerlist}
+
+% An environment IDENTICAL to innerlist that has better pre-list spacing
+% when used as the first thing in a \section
+%
+% Usage:
+%   \begin{loneinnerlist}
+%       \item ...    % (or \item for no bullet)
+%   \end{loneinnerlist}
+\newlist{loneinnerlist}{itemize}{3}
+    \setlist[loneinnerlist]{label=\enskip\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+    \fixendlist{loneinnerlist}
+    \fixinnerlist{loneinnerlist}
+
+%%% EXTRA SPACE
+
+% To add some paragraph space between lines.
+% This also tells LaTeX to preferably break a page on one of these gaps
+% if there is a needed pagebreak nearby.
+\newcommand{\blankline}{\quad\pagebreak[3]}
+\newcommand{\halfblankline}{\quad\vspace{-0.5\baselineskip}\pagebreak[3]}
+
+%%% FORMATTING MACROS
+
+% Provides a linked \doi{#1} that links doi:#1 to http://dx.doi.org/#1
+\usepackage{doi}
+% To change the text before the DOI, adjust this command
+%\renewcommand\doitext{doi:}
+
+% Provides a linked \url{#1} that doesn't require escape characters
+\usepackage{url}
+
+% You can adjust the style \url{} uses here:
+% (options are: same, rm, sf, tt; defaults to tt)
+\urlstyle{same}
+
+% For \email{ADDRESS}, links ADDRESS to the url mailto:ADDRESS
+% (uncomment to typeset the e\-/mail address in typewriter font;
+%  otherwise, will be typeset in the \urlstyle above)
+%\DeclareUrlCommand\emaillink{\urlstyle{tt}}
+\providecommand*\emaillink[1]{\nolinkurl{#1}}
+\providecommand*\email[1]{\href{mailto:#1}{\emaillink{#1}}}
+
+\providecommand\BibTeX{{B\kern-.05em{\sc i\kern-.025em b}\kern-.08em \TeX}}
+\providecommand\Matlab{\textsc{Matlab}}
+
+% Custom hyphenation rules for words that LaTeX has trouble with
+\hyphenation{bio-mim-ic-ry bio-in-spi-ra-tion re-us-a-ble pro-vid-er Media-Wiki}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+%\thispagestyle{plain}
+\makeheading{Anca Dumitrache \\ % [{\includegraphics[height=1in]{anca.jpg}}]
+\textmd{\normalsize{\Info: \url{http://ancad.ro} | \Letter: \email{anca.dmtrch@gmail.com} | \phone: +31-614-622-712}}}
+
+
+% NOTE: Mind where the & separators and \\ breaks are in the following
+%       table. Table is one row made up of three parboxes. The left
+%       parbox has address info, the middle parbox has a vertical bar,
+%       and the right parbox has phone and electronic contact
+%       information.
+%
+% MACROS: \rcollength is the width of the right column of the table
+%             (adjust it to your liking; default is 1.85in).
+%         \spacewidth is width of area between left and right boxes.
+%
+\newlength{\rcollength}\setlength{\rcollength}{2.5in}%
+\newlength{\spacewidth}\setlength{\spacewidth}{12pt}
+%
+%\section{Personal Information}
+
+%\begin{tabular}[t]{@{}p{\textwidth-\rcollength-\spacewidth}@{}p{\spacewidth}@{}p{\rcollength}}%
+% Address box
+%\parbox{\textwidth-\rcollength-\spacewidth}{Located in: Amsterdam, Netherlands\\
+%Nationality: Romanian}
+%&
+% Uncomment to add a vertical bar in middle of contact information
+%{\vrule width 0.5pt}
+%\parbox[m][5\baselineskip]{\spacewidth}{} &
+% Non-snail-mail contact information
+%\parbox{\rcollength}{%
+%\emph{Mobile:} +31-614-622-712 \\
+%\emph{E-mail:} \email{anca.dmtrch@gmail.com}\\
+%\emph{WWW:} \url{http://ancad.ro} }
+%\end{tabular}
+
+%\begin{tabular}[t]{ll}
+%Located in: Amsterdam, Netherlands & \emph{Mobile:} +31-614-622-712 \\
+%Nationality: Romanian & \emph{E-mail:} \email{anca.dmtrch@gmail.com}\\
+% & \emph{WWW:} \url{http://ancad.ro}
+%\end{tabular}
+
+
+%%
+%% In modern CV's, it seems like ``Objective'' is frowned upon. Instead,
+%% incorporate it into a well-constructed cover letter. The ``More
+%% information'' can go at the end of the CV, but it should not distract
+%% from the section giving references available to contact.
+%%
+%
+% \section{Objective}
+%
+% Full-time position that allows for advanced research in electrical and
+% computer engineering (communications, control, software, electronics,
+% and sustainability), with a particular focus on complex distributed
+% systems (i.e., modeling, analysis, design, and verification)
+% \begin{innerlist}
+%     \item For more information, see \url{http://www.tedpavlic.com/engjobsearch/}
+% \end{innerlist}
+%\end{outerlist}
+
+
+\section{Interests}
+
+Data Science, Human -- Computer Interaction, Natural Language Processing, Machine Learning, Crowdsourcing, Linked Open Data.
+
+
+%\begin{loneinnerlist}
+    %\item[] 
+    %\item[] Software: Tensorflow, .
+%\end{loneinnerlist}
+
+%\section{Availability}
+
+%\begin{loneinnerlist}
+%    \item Start time is negotiable; may be possible to start immediately
+%    \item Geographic location is flexible, but there is preference
+%        for Tempe, AZ
+%\end{loneinnerlist}
+
+%\section{Security Clearance}
+
+%Department of Defense Top Secret SCI with polygraph (expired: 2002)
+
+%% \section{Citizenship}
+%%
+%% USA
+
+
+\vspace{0.1in}
+\section{Professional Experience}
+
+
+{\textbf{Center for Advanced Studies (CAS), IBM}}, Amsterdam,
+Netherlands \hfill \textbf{02/2013 to 11/2018}
+\begin{outerlist}
+\item[] {\it Research scientist}
+
+Implemented the CrowdTruth project (collecting gold standard data for the training, evaluation of machine learning systems) in the context of IBM Watson powered business solutions. Trained and evaluated question answering models from the IBM Bluemix stack for applications in the medical field, tourism and cultural heritage. Part-time position. Resulting publications:
+\begin{innerlist}
+\item Dumitrache et al.: {\it Empirical Methodology for Crowdsourcing Ground Truth}. Semantic Web Journal (in publication).
+\item Dumitrache et al.: {\it Dr. Detective: combining gamification techniques and crowdsourcing to create a gold standard in medical text}. CrowdSem Workshop at ISWC 2013.
+%\item Project: Dr. Detective -- Making Information Extraction Playful
+%\item Publication: Dumitrache et al.: {\it Dr. Detective: combining gamification techniques and crowdsourcing to create a gold standard in medical text}. CrowdSem Workshop at ISWC 2013.
+\end{innerlist}
+\end{outerlist}
+
+\halfblankline
+
+
+{\textbf{Google AI}}, New York,
+USA \hfill \textbf{06/2016 to 09/2016}
+\begin{outerlist}
+\item[] {\it Software engineering intern}
+
+Developed a model for relation classification from sentences in the open domain, using a convolutional neural network with word embeddings as features. Implemented in Python with Tensorflow. Resulting publications:
+\begin{innerlist}
+\item Dumitrache, Aroyo, Welty: {\it Crowdsourcing Semantic Label Propagation in Relation Classification}. FeVeR Workshop at EMNLP 2018.
+\item Dumitrache, Aroyo, Welty: {\it False Positive and Cross-relation Signals in Distant Supervision}. AKBC Workshop at NIPS 2017.
+\end{innerlist}
+\end{outerlist}
+
+
+\halfblankline
+
+
+{\textbf{Watson Research Group, IBM}}, New York,
+USA \hfill \textbf{01/2014 to 06/2014}
+\begin{outerlist}
+\item[] {\it Research intern}
+
+Trained and evaluated a model for relation extraction from sentences in the medical domain, showing that models trained with crowdsourcing annotations perform as well as those trained with expert annotations. Implemented in Java. Resulting publications:
+\begin{innerlist}
+\item Dumitrache, Aroyo, Welty: {\it Crowdsourcing Ground Truth for Medical Relation Extraction}. ACM TiiS, 8(2), 12.
+\item Dumitrache, Aroyo, Welty: {\it CrowdTruth Measures for Language Ambiguity}. LD4IE Workshop at ISWC 2015. Best paper award.
+\end{innerlist}
+\end{outerlist}
+
+\halfblankline
+
+\textbf{Network Institute, Vrije Universiteit Amsterdam},
+Netherlands \hfill \textbf{10/2012 to 08/2013}
+\begin{outerlist}
+\item[] {\it Academy assistant}
+
+Analyzed online networks of scholarly publications for relevant indicators of researcher talent. Implemented in R. Resulting publication:
+\begin{innerlist}
+\item Dumitrache, Groth, Besselaar: {\it Identifying research talent using web-centric databases}. ACM Web Science 2013.
+\end{innerlist}
+\end{outerlist}
+
+\halfblankline
+
+\textbf{Drupal} \hfill \textbf{05/2012 to 08/2012}
+\begin{outerlist}
+\item[] {\it Google Summer of Code intern}
+
+Developed and tested patches for Schema.org microdata support for Drupal user-contributed modules (contrib field type). Implementation done in PHP.
+%\begin{innerlist}
+%\item Project: \href{http://groups.drupal.org/node/234993}{Extend Microdata Support to Contrib Field Types}
+%\item 
+%\end{innerlist}
+\end{outerlist}
+
+%\halfblankline
+
+%\href{http://krr.cs.vu.nl/}{\textbf{Knowledge Representation and Reasoning Group}}, \hfill \textbf{10/2011 to 08/2012} \\
+%\textbf{Vrije Universiteit Amsterdam}, Netherlands
+%\begin{outerlist}
+%\item[] {\it Student assistant}
+%\begin{innerlist}
+%\item Project: \href{http://www.openphacts.org/}{OpenPHACTS}
+%\item Developed an API based on Sesame Sail for interpreting SPARQL queries over datasets stored in HBase. Implemented in Java.
+%\end{innerlist}
+%\end{outerlist}
+
+%\halfblankline
+
+%\href{http://www.wiwiss.fu-berlin.de/en/institute/pwo/bizer/index.html}{\textbf{Web-based Systems Group, Free University Berlin}},  \hfill \textbf{07/2011 to 08/2011} \\
+%Germany
+%\begin{outerlist}
+%\item[] {\it Research assistant}
+%\begin{innerlist}
+%\item Studied clustering in the Billion Triple Challenge 2012 dataset. Implemented in Scala, Java.
+%\end{innerlist}
+%\end{outerlist}
+
+%\halfblankline
+
+%\href{http://kwarc.info/}{\textbf{KWARC Group, Jacobs University Bremen}}, Germany  \hfill \textbf{10/2009 to 05/2011}
+%\begin{outerlist}
+%\item[] {\it BSc thesis student}
+%\begin{innerlist}
+%\item Project: BauDenkMalNetz -- Creating a Semantically Annotated Web Resource for Historical Buildings
+%\item Applied natural language processing techniques to add semantic metadata to a series of touristic guides about historical buildings. Developed a prototype web resource of historical landmarks, making use of Drupal, Semantic MediaWiki. Implemented in PHP.
+%\end{innerlist}
+%\end{outerlist}
+
+\halfblankline
+
+\textbf{Reasoning and Querying Unit, Digital Enterprise}  \hfill \textbf{06/2010 to 09/2010} \\
+\textbf{Research Institute (DERI)}, Galway, Ireland
+\begin{outerlist}
+\item[] {\it Research intern}
+
+Developed an XML parser mapping XMPP stanzas to RDF, for the purpose of creating a server component for Jabber. Implemented in C/C++. Resulting publication:
+\begin{innerlist}
+\item Dumitrache et al.: {\it Enabling privacy-preserving semantic presence in instant messaging systems}. Context 2011.
+\end{innerlist}
+\end{outerlist}
+
+
+\section{Education}
+
+\href{http://www.few.vu.nl/}{\textbf{Vrije Universiteit Amsterdam}},
+Netherlands \hfill \textbf{11/2013 to 11/2018}
+\begin{outerlist}
+\item[] {\it PhD, User-Centric Data Science research group}
+\item[] {\it Thesis:} Modeling Ambiguity in Natural Language Processing with Crowdsourcing
+%\begin{innerlist}
+%\item Project: CrowdTruth - Capturing and interpreting inter-annotator disagreement in crowdsourcing, in order to build better ground truth data for training and evaluating natural language processing models
+%\item Held lectures, assisted students during laboratory sessions, graded homework, held practice tutorials. Involved in the following courses: Watson Innovation, Text Mining for Digital Humanities, %Knowledge and Media, The Social Web.
+%\end{innerlist}
+\end{outerlist}
+
+\halfblankline
+
+\textbf{Vrije Universiteit Amsterdam},
+Netherlands \hfill \textbf{09/2011 to 08/2013}
+\begin{outerlist}
+\item[] {\it MSc, Artificial Intelligence (cum laude)}
+\item[] {\it Thesis:}  Combining Gamification Techniques and Crowdsourcing to Create a Gold Standard for Medical Text
+%\begin{innerlist}
+%\item Specialization: Knowledge Technology and Intelligent Internet Applications
+%\item GPA: 8.29 (1-10 scale), graduated cum laude
+%\item Relevant coursework: Advanced Information Retrieval, Data Mining, Intelligent Web Applications, Ontology Engineering, The Social Web
+%\item Expected graduation date: August 2013
+%\end{innerlist}
+\end{outerlist}
+
+\halfblankline
+
+\textbf{Jacobs University Bremen},
+Germany \hfill \textbf{09/2008 to 06/2011}
+\begin{outerlist}
+\item[] {\it BSc, Computer Science}
+%\begin{innerlist}
+%\item GPA: 1.48 (5-1 scale)
+%\item Relevant coursework: Databases and Web Applications, Computational Semantics of Natural Language
+%\end{innerlist}
+\end{outerlist}
+
+
+\section{Technical Skills}
+
+\begin{bibsection}
+\item[] {\it Programming languages}:
+\begin{innerlist}
+\item Good: Python (Tensorflow, Gensim, NLTK, SciPy), R (tidyverse)
+\item Moderate: Java, PHP, C/C++
+\end{innerlist}
+\item[] {\it Software}: Jupyter Notebooks, RStudio, Git, \LaTeX, Gephi.
+\item[] {\it Databases}: SQL, Mongo DB, HBase.
+\item[] {\it Distributed computing}:  Distributed TensorFlow, Spark, Map Reduce.
+\item[] {\it Operating systems}: Unix/Linux.
+\end{bibsection}
+
+
+\section{Workshops \& Invited Talks}
+
+\begin{bibsection}
+
+\item Will organize tutorial on the {\it CrowdTruth Methodology for Crowdsourcing Ground Truth} at the International Semantic Web Conference (ISWC). Monterey, CA, USA. October, 2018.
+
+\item Organized {\it Subjectivity, Ambiguity and Disagreement (SAD) Workshop} at the Human Computation (HCOMP) conference. Z\"{u}rich, Switzerland. July 2018.
+
+\item Tutorial on {\it CrowdTruth -- Crowdsourcing Ground Truth with Disagreement Analysis} at the {\it Human Computation NL} symposium. Amsterdam, Netherlands. September, 2017.
+
+\item Keynote talk on {\it Harnessing the Diversity in Human Annotation with CrowdTruth} at the ESSENCE Network {\it Conference on Computational Approaches to Diversity in Interaction and Meaning}. Venice, Italy. October 2017.
+
+\item Talk on {\it Watson \& Natural Language Processing} at the {\it Watson Experience MeetUp}. Utrecht, Netherlands. March 2016.
+
+\end{bibsection}
+
+
+
+\section{Awards \& Honors}
+
+\begin{bibsection}
+
+    \item {\it IBM PhD Fellowship} awards program, IBM, Netherlands, 2013 -- 2016.
+
+    \item {\it Best Poster} in the Human and the Machine track, {\it 2nd Prize} for best poster of the conference, ICT Open, Netherlands, 2016.  
+
+    \item {\it VU Fellowship Programme (VUFP)} scholarship for academic excellence, Vrije Universiteit Amsterdam, Netherlands, 2011 -- 2013.
+
+    \item {\it President's List} distinction for academic excellence, Jacobs University Bremen, Germany, 2010 -- 2011 and 2008 -- 2009. \\
+
+\end{bibsection}
+
+
+\section{Selected Courses}
+
+\begin{bibsection}
+    \item {\it Transylvanian Machine Learning Summer School (TMLSS)} on machine \& reinforcement learning. Cluj Napoca, Romania. July 2018.
+    \item {\it Deep Learn} summer school on deep learning. Bilbao, Spain. July 2017.
+    \item {\it CBS Data Camp \& Advanced Course on Managing Big Data} and working with Spark. Enschede, Netherlands. December 2016.
+    \item {\it Lisbon Machine Learning Summer School (LxMLS)} on natural language processing. Lisbon, Portugal. July 2015.
+    \item {\it Data Science in Society} summer school. Southampton, UK. July 2014.
+\end{bibsection}
+
+
+\section{Languages}
+
+\begin{bibsection}
+\item[] {\it Romanian:} native
+\item[] {\it English:} proficient (C2)
+\item[] {\it French:} intermediate (B2)
+\item[] {\it Dutch:} basic (A2) 
+\end{bibsection}
+
+%\section{Other Work Experience}
+
+%{\textbf{Drupal}} \hfill \textbf{05/2012 to 08/2012}
+%\begin{outerlist}
+%\item[] {\it Google Summer of Code intern}
+%\begin{innerlist}
+%\item Project: \href{http://groups.drupal.org/node/234993}{Extend Microdata Support to Contrib Field Types}
+%\item Supervisor: \href{http://lin-clark.com/}{Lin Clark}
+%\item Developed and tested patches for microdata support for Drupal user-contributed modules. Implementation done in PHP.
+%\end{innerlist}
+%\end{outerlist}
+
+%\halfblankline
+
+%{\textbf{Jacobs University Bremen}}, Germany \hfill \textbf{09/2009 to 06/2011}
+%\begin{outerlist}
+%\item[] {\it Teaching assistant}
+%\begin{innerlist}
+%\item Assisted students during the laboratory, graded homework, held practice tutorials. Involved in the following courses: Natural Science Lab Unit Computer Science I (C-Programming), Programming in C++, Operating Systems Lab, Text and Digital Media University Study Course.
+%\end{innerlist}
+%\end{outerlist}
+
+%\halfblankline
+
+%\textbf{Cognitive Systems Research Group}, \hfill \textbf{03/2009 to 06/2011} \\
+%\textbf{University of Bremen}, Germany
+%\begin{outerlist}
+%\item[] {\it Student assistant}
+%\begin{innerlist}
+%\item Developed and maintained a client-server integrated software suite for eye tracking research, interacting with a SMART board and an eye tracking device. Implementation done in C++, C\#.
+%\end{innerlist}
+%\end{outerlist}
+
+%\halfblankline
+
+%\textbf{Recognos}, Cluj-Napoca, Romania \hfill \textbf{06/2009 to 08/2009}
+%\begin{outerlist}
+%\item[] {\it Software development intern}
+%\begin{innerlist}
+%\item Developed semantic web applications for clients, transforming taxonomies into ontologies.
+%\end{innerlist}
+%\end{outerlist}
+
+%\section{Other Work Experience}
+
+%{\textbf{Vrije Universiteit Amsterdam}, Netherlands} \hfill \textbf{09/2014 to present}
+%\begin{outerlist}
+%\item[] {\it Teaching assistant}
+%\begin{innerlist}
+%\item Held lectures, assisted students during laboratory sessions, graded homework, held practice tutorials. Involved in the following courses: Watson Innovation, Text Mining for Digital Humanities, Knowledge and Media, The Social Web.
+%\end{innerlist}
+%\end{outerlist}
+
+%\halfblankline
+
+%{\textbf{Jacobs University Bremen}}, Germany \hfill \textbf{09/2009 to 06/2011}
+%\begin{outerlist}
+%\item[] {\it Teaching assistant}
+%\begin{innerlist}
+%\item Assisted students during the laboratory, graded homework, held practice tutorials. Involved in the following courses: Natural Science Lab Unit Computer Science I (C-Programming), Programming in C++, Operating Systems Lab, Text and Digital Media University Study Course.
+%\end{innerlist}
+%\end{outerlist}
+
+%\halfblankline
+
+%\textbf{Cognitive Systems Research Group}, \hfill \textbf{03/2009 to 06/2011} \\
+%\textbf{University of Bremen}, Germany
+%\begin{outerlist}
+%\item[] {\it Student assistant}
+%\begin{innerlist}
+%\item Developed and maintained a client-server integrated software suite for eye tracking research, interacting with a SMART board and an eye tracking device. Implementation done in C++, C\#.
+%\end{innerlist}
+%\end{outerlist}
+
+%\halfblankline
+
+%\textbf{Recognos}, Cluj-Napoca, Romania \hfill \textbf{06/2009 to 08/2009}
+%\begin{outerlist}
+%\item[] {\it Software development intern}
+%\begin{innerlist}
+%\item Developed semantic web applications for clients, transforming taxonomies into ontologies.
+%\end{innerlist}
+%\end{outerlist}
+
+
+%\section{Selected Publications}
+
+%\begin{bibenum}
+
+    %\item Anca Dumitrache, Oana Inel, Benjamin Timmermans, Carlos Ortiz, Robert-Jan Sips, Lora Aroyo, Chris Welty: {\it Empirical Methodology for Crowdsourcing Ground Truth}. Semantic Web Journal (in publication).
+
+    %\item Dumitrache, Aroyo, Welty: {\it Capturing Ambiguity in Crowdsourcing Frame Disambiguation}. HCOMP 2018.
+
+    %\item Dumitrache, Aroyo, Welty: {\it Crowdsourcing Ground Truth for Medical Relation Extraction}. ACM Transactions on Interactive Intelligent Systems (TiiS), 8(2), 12.
+
+    %\item Anca Dumitrache, Lora Aroyo, Chris Welty: {\it False Positive and Cross-relation Signals in Distant Supervision}. AKBC Workshop at NIPS 2017.
+
+    %\item Anca Dumitrache, Lora Aroyo, Chris Welty: {\it CrowdTruth Measures for Language Ambiguity: The Case of Medical Relation Extraction}. LD4IE Workshop at ISWC 2015.
+
+    %\item Anca Dumitrache, Lora Aroyo, Chris Welty: {\it Achieving Expert-Level Annotation Quality with CrowdTruth: The Case of Medical Relation Extraction}. BDM2I Workshop at ISWC 2015.
+
+    %\item Anca Dumitrache: {\it Crowdsourcing Disagreement for Collecting Semantic Annotation}. PhD Symposium at ESWC 2015.
+
+    %\item Oana Inel, Khalid Khamkham, Tatiana Cristea, Arne Rutjes, Jelle van der Ploeg, Lora Aroyo, Robert-Jan Sips, Anca Dumitrache and Lukasz Romaszko: {\it Crowd Truth: Machine-Human Computation Framework for Harnessing Disagreement in Gathering Annotated Data}. ISWC 2014.
+
+    %\item Anca Dumitrache, Lora Aroyo, Chris Welty, Robert-Jan Sips, Anthony Levas: {\it Dr. Detective: combining gamification techniques and crowdsourcing to create a gold standard in medical text}. CrowdSem at ISWC 2013.
+
+    %\item Anca Dumitrache, Paul Groth, Peter van den Besselaar: {\it Identifying research talent using web-centric databases}. ACM Web Science 2013.
+
+    %\item Anca Dumitrache, Alessandra Mileo, Antoine Zimmermann, Axel Polleres, Philipp Obermeier, Owen Friel: {\it Enabling privacy-preserving semantic presence in instant messaging systems}. Context 2011.
+
+    %\item Anca Dumitrache, Christoph Lange: {\it BauDenkMalNetz - Creating a Semantically Annotated Web Resource of Historical Buildings}. SePublica Workshop at ESWC 2011.
+
+    %\item Anca Dumitrache, Christoph Lange, Michael Kohlhase, Nils Aschenbeck: {\it Prototyping a Browser for a Listed Buildings Database with Semantic MediaWiki}. Semantic Wikis Workshop at ESWC 2010.
+    
+%\end{bibenum}
+
+
+%\section{Reviewer for}
+
+%\begin{loneinnerlist}
+
+%	\item[] {\it Semantics}, 2017. 
+%	\item[] {\it American Medical Informatis Association (AMIA)}, 2016. 
+%	\item[] {\it International Semantic Web Conference (ISWC)}, 2015 -- 2017.
+%	\item[] {\it Extended Semantic Web Conference (ESWC)}, 2015 -- 2017.
+%	\item[] {\it Semantic Web Journal}, 2016 -- 2017.\\
+	
+%\end{loneinnerlist}
+
+%\section{References}
+
+%\begin{loneinnerlist}
+%\item[] Prof. Lora Aroyo, \email{l.m.aroyo@gmail.com}
+%\item[] Prof. Chris Welty, \email{cawelty@gmail.com}
+%\end{loneinnerlist}
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% End CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------%
+% The following is copyright and licensing information for
+% redistribution of this LaTeX source code; it also includes a liability
+% statement. If this source code is not being redistributed to others,
+% it may be omitted. It has no effect on the function of the above code.
+%----------------------------------------------------------------------%
+% Copyright (c) 2007, 2008, 2009, 2010, 2011 by Theodore P. Pavlic
+%
+% Unless otherwise expressly stated, this work is licensed under the
+% Creative Commons Attribution-Noncommercial 3.0 United States License. To
+% view a copy of this license, visit
+% http://creativecommons.org/licenses/by-nc/3.0/us/ or send a letter to
+% Creative Commons, 171 Second Street, Suite 300, San Francisco,
+% California, 94105, USA.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+% OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+% MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+% IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+% CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+% TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+% SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+%----------------------------------------------------------------------%
